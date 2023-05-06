@@ -1,6 +1,6 @@
-# Tic Tac Toe game
+# 2048 game
 
-This is a Python project based on a Real Python tutorial (link: https://realpython.com/tic-tac-toe-python/).
+This is a copy of 2048 game made in Python, using Tkinter library for GUI.
 
 ## Table of contents
 
