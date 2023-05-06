@@ -33,7 +33,7 @@ In the future I could add an option of resizing the board (as it would require o
 
 ### Useful resources
 
-- [YouTube - Kite](https://www.youtube.com/watch?v=b4XP2IcI-Bg&ab_channel=Kite) - Useful tutorial on 2048 game in tkinter, Python, that I referred to when I got stuck
+- [YouTube - Kite](https://www.youtube.com/watch?v=b4XP2IcI-Bg&ab_channel=Kite) - Useful tutorial on 2048 game in Tkinter, Python, that I referred to when I got stuck
 
 ## Author
 
