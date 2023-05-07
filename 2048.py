@@ -4,8 +4,6 @@ import random
 
 BOARD_SIZE = 4
 
-# doimplementowac resetowanie gry (w menu) oraz mozliwosc obejrzenia gry granej przez AI
-
 class Game(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
