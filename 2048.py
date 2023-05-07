@@ -4,6 +4,8 @@ import random
 
 BOARD_SIZE = 4
 
+# doimplementowac resetowanie gry (w menu) oraz mozliwosc obejrzenia gry granej przez AI
+
 class Game(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
@@ -23,7 +25,41 @@ class Game(tk.Frame):
         self.master.bind("<Up>", self.up_pressed)
         self.master.bind("<Down>", self.down_pressed)
         
+        self._create_menu()
         self.make_gui()
+        self.start_game()
+    
+    def _create_menu(self):
+        menu_bar = tk.Menu(self)
+        self.master.config(menu=menu_bar)
+        file_menu = tk.Menu(menu_bar)
+        file_menu.add_command(
+            label="Restart game",
+            command=self.reset_board
+        )
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=quit)
+        menu_bar.add_cascade(label="File", menu=file_menu)
+    
+    def reset_board(self):
+        self.score_text.config(
+            text="Score: ",
+            fg=c.SCORE_COLOR
+        )
+        self.score = 0
+        self.score_lbl.configure(text=self.score)
+        for i in range(BOARD_SIZE):
+            for j in range(BOARD_SIZE):
+                self.matrix[i][j] = 0
+                self.cells[i][j]["frame"].configure(
+                    bg=c.EMPTY_CELL_COLOR
+                )
+                self.cells[i][j]["number"].configure(
+                    text="",
+                    bg=c.EMPTY_CELL_COLOR
+                )
+        self.update_idletasks()
+                
         self.start_game()
     
     def make_gui(self):
@@ -36,6 +72,7 @@ class Game(tk.Frame):
             score_frm,
             text="Score: ",
             font=c.SCORE_FONT,
+            fg=c.SCORE_COLOR,
             bg=c.BG_COLOR
         )
         self.score_text.grid(row=0, column=0)
@@ -43,7 +80,8 @@ class Game(tk.Frame):
             score_frm,
             text=self.score,
             font=c.SCORE_FONT,
-            bg=c.BG_COLOR
+            bg=c.BG_COLOR,
+            fg=c.SCORE_COLOR
         )
         self.score_lbl.grid(row=0, column=1)
         
@@ -90,7 +128,7 @@ class Game(tk.Frame):
             row = random.randint(0, BOARD_SIZE-1)
             col = random.randint(0, BOARD_SIZE-1)
             
-        rand = random.choices([2, 4], [0.9, 0.1])[0]
+        rand = random.choices([2, 4], [0.95, 0.05])[0]
         self.matrix[row][col] = rand
         self.cells[row][col]["frame"].configure(bg=c.CELL_COLORS[rand].color)
         self.cells[row][col]["number"].configure(
@@ -138,7 +176,6 @@ class Game(tk.Frame):
                 new_matrix[i][j] = self.matrix[j][i]
         
         self.matrix = new_matrix
-    
     
     def update_GUI(self):
         for i in range(BOARD_SIZE):
